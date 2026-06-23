@@ -78,3 +78,18 @@ docker container prune
 docker image prune
 - remove unused images
 
+# Volumes
+docker volume ls
+- list volumes
+
+docker volume create [name]
+- create a volume
+
+docker volume inspect [name]
+- inspect volume details
+
+docker volume rm [name]
+- remove a volume
+
+docker volume prune
+- delete unused volumes
