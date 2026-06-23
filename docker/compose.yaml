@@ -8,7 +8,7 @@ services: # services are a list of containers
     ports: # ports is a list without a key value pair so the syntax is just dashes for each element
       - "8080:80" # forward packets coming through port 8080 on this machine to the container on port 80.
     volumes:
-      ../nginx/default.conf:/etc/nginx/conf.d/default.conf:ro # ro means read only
+      - ../nginx/default.conf:/etc/nginx/conf.d/default.conf:ro # ro means read only
   backend:
     image: python:3.13-alpine
     command: python -m http.server 8000
