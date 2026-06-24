@@ -6,6 +6,7 @@ The goal of this project is to build practical Linux and networking skills throu
 - Docker
 - Nginx
 - SSH
+- nftables
 
 # Current Demo
 A Docker Compose deployment in docker/ consisting of an Nginx reverse proxy to a backend service with shared bind-mounted notes.
