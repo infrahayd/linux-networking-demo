@@ -1,5 +1,5 @@
 # Linux Networking Demo
-The goal of this project is to build practical Linux and networking skills through small deployments.
+A small project I made while learning Linux and different networking technologies.
 
 # Technologies
 - Linux
