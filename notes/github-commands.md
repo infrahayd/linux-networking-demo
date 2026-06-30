@@ -1,4 +1,4 @@
-# GitHub CLI (gh)
+# GitHub CLI (`gh`)
 
 ## Getting Help
 
@@ -67,23 +67,38 @@ Example:
 gh repo create linux-networking-demo
 ```
 
-Useful flags:
+---
 
-`--public`
+`gh repo create [name] --public`
 
-* Create a public repository.
+* Create a **public** GitHub repository.
 
-`--private`
+---
 
-* Create a private repository.
+`gh repo create [name] --private`
 
-`--source .`
+* Create a **private** GitHub repository.
 
-* Create a repository from the current directory.
+---
 
-`--push`
+`gh repo create [name] --public --source=. --remote=origin --push`
 
-* Push local commits immediately after creation.
+* Create a public repository from the current directory.
+* Configure the `origin` remote automatically.
+* Push the current branch immediately.
+
+Example:
+
+```bash
+gh repo create linux-networking-demo --public --source=. --remote=origin --push
+```
+
+Flags:
+
+* `--public` → Create a public repository.
+* `--source=.` → Use the current directory as the local repository.
+* `--remote=origin` → Configure the remote named `origin`.
+* `--push` → Push local commits immediately after creation.
 
 ---
 
@@ -108,6 +123,24 @@ gh repo clone infrahayd/linux-networking-demo
 `gh repo view --web`
 
 * Open the repository in your default browser.
+
+---
+
+`gh repo edit --visibility public`
+
+* Change an existing repository from private to public.
+
+Example:
+
+```bash
+gh repo edit --visibility public
+```
+
+---
+
+`gh repo edit --visibility private`
+
+* Change an existing repository from public to private.
 
 ---
 
@@ -195,6 +228,7 @@ Think:
 
 ```text
 Turn:
+
 Fix typo
 Fix typo again
 Update notes
@@ -301,19 +335,37 @@ gh release create v1.0
 
 `gh auth login`
 
-* Log in.
+* Log into GitHub CLI.
+
+---
+
+`gh auth status`
+
+* Verify you're logged in.
 
 ---
 
 `gh repo create`
 
-* Create a repository.
+* Create a GitHub repository.
+
+---
+
+`gh repo create --public --source=. --remote=origin --push`
+
+* Create a public repository from the current project and push it immediately.
 
 ---
 
 `gh repo view --web`
 
-* Open repository in browser.
+* Open the repository in a browser.
+
+---
+
+`gh repo edit --visibility public`
+
+* Make an existing repository public.
 
 ---
 
@@ -337,7 +389,7 @@ gh release create v1.0
 
 `gh pr merge --squash`
 
-* Merge pull request as a single commit.
+* Merge a pull request as a single commit.
 
 ---
 
@@ -350,4 +402,3 @@ gh release create v1.0
 `gh issue create`
 
 * Create an issue.
-
