@@ -1,302 +1,91 @@
-# Git Commands
-
-## Basic Concepts
-
-### Remote Repository
-
-* A repository hosted on another machine, usually GitHub.
-* Your local repository can push changes to and pull changes from a remote repository.
-
-### Branch
-
-* A branch is an independent line of development.
-* Think of branches as separate workspaces that can have different commits.
-* New commits are added to the branch you currently have checked out.
-
 ---
 
-## Repository Status
+## Initializing a Repository
 
-`git status`
+`git init`
 
-* Show:
-
-  * Current branch
-  * Modified files
-  * Staged files
-  * Untracked files
-* Usually the first command to run when checking repository state.
-
----
-
-## Staging Files
-
-`git add [file]`
-
-* Add a file to the staging area.
-* Staged files will be included in the next commit.
+* Initialize the current directory as a Git repository.
+* Creates the hidden `.git` directory, which stores all Git metadata and commit history.
 
 Example:
 
-```bash id="g1"
-git add README.md
+```bash
+git init
 ```
 
 ---
 
-## Branch Management
+## Viewing Branch Tracking Information
 
-`git branch`
-
-* Show all local branches.
-* `*` indicates the currently checked-out branch.
-
-Example:
-
-```text id="g2"
-* master
-  docker-notes
-```
-
----
-
-`git branch [branch-name]`
-
-* Create a new branch.
-* Does not switch to it.
-
-Example:
-
-```bash id="g3"
-git branch docker-notes
-```
-
----
-
-`git checkout [branch-name]`
-
-* Switch to another branch.
-
-Example:
-
-```bash id="g4"
-git checkout docker-notes
-```
-
----
-
-`git checkout -b [branch-name]`
-
-* Create a new branch and switch to it immediately.
-
-Example:
-
-```bash id="g5"
-git checkout -b docker-notes
-```
-
----
-
-`git switch -c [branch-name]`
-
-* Modern version of `git checkout -b`.
-
-Example:
-
-```bash id="g6"
-git switch -c docker-notes
-```
-
----
-
-## Creating Commits
-
-`git commit`
-
-* Create a commit from the staging area.
-
----
-
-`git commit -m "message"`
+`git branch -vv`
 
 Flags:
 
-* `-m` → Commit message.
+* `-vv` → Show additional information.
+
+* Display:
+
+  * Current branch.
+  * Upstream (remote) branch.
+  * Latest commit.
+  * Whether the local branch is ahead or behind the remote.
 
 Example:
 
-```bash id="g7"
-git commit -m "Add Docker notes"
+```text
+* main 1234567 [origin/main] Initial commit
 ```
 
 ---
 
-`git commit -a -m "message"`
+## Adding a Remote Repository
 
-Flags:
+`git remote add origin [url]`
 
-* `-a` → Automatically stage modified tracked files before committing.
-* Does **not** stage new untracked files.
-* `-m` → Commit message.
+* Add a remote repository.
+* `origin` is the conventional name for the primary remote.
 
 Example:
 
-```bash id="g8"
-git commit -a -m "Update README"
+```bash
+git remote add origin git@github.com:user/repo.git
 ```
 
 ---
 
-## Viewing History
+## Changing a Remote URL
 
-`git log`
+`git remote set-url origin [new-url]`
 
-* Show commit history.
-
-Useful flags:
-
-`git log --oneline`
-
-* Compact commit history.
-
----
-
-## Comparing Changes
-
-`git diff`
-
-* Show differences between:
-
-  * Working directory
-  * Staging area
-
-In other words:
-
-```text id="g9"
-What changed since the last git add?
-```
-
----
-
-`git diff --staged`
-
-* Show differences between:
-
-  * Staging area
-  * Most recent commit
-
-In other words:
-
-```text id="g10"
-What will be committed next?
-```
-
----
-
-## Pushing Changes
-
-`git push`
-
-* Upload commits to the remote repository.
-
-Works after an upstream relationship has already been configured.
-
----
-
-`git push -u origin master`
-
-Flags:
-
-* `-u` → Set upstream tracking relationship.
-
-Arguments:
-
-* `origin` → Remote repository name.
-* `master` → Branch being pushed.
+* Replace the URL associated with an existing remote.
 
 Example:
 
-```bash id="g11"
-git push -u origin master
+```bash
+git remote set-url origin git@github.com:user/new-repo.git
 ```
-
-Meaning:
-
-```text id="g12"
-Push local master
-to remote origin/master
-and remember this relationship
-```
-
-Afterward:
-
-```bash id="g13"
-git push
-git pull
-```
-
-will automatically know which branch to use.
 
 ---
 
-## Remote Repositories
+## Removing a Remote
+
+`git remote remove origin`
+
+* Remove the configured remote named `origin`.
+
+Useful if the remote was configured incorrectly.
+
+---
+
+## Checking the Current Remote
 
 `git remote -v`
 
-Flags:
-
-* `-v` → Verbose.
-
-* Show remote repository URLs.
+* Show all configured remotes and their URLs.
 
 Example:
 
-```text id="g14"
+```text
 origin  git@github.com:user/repo.git (fetch)
 origin  git@github.com:user/repo.git (push)
 ```
-
----
-
-## Pulling Changes
-
-`git pull`
-
-* Download changes from the remote repository.
-* Merge them into the current branch.
-
-Think:
-
-```text id="g15"
-GitHub → Local repository
-```
-
----
-
-## Amending Commits
-
-`git commit --amend`
-
-* Replace the most recent commit.
-* Can change:
-
-  * Commit message
-  * Staged content
-* Creates a new commit that replaces the old one.
-
----
-
-`git commit --amend --reset-author`
-
-* Replace the most recent commit.
-* Update author information using current Git configuration.
-* Useful after fixing incorrect name or email settings.
-
-Think:
-
-```text id="g16"
-Replace last commit
-with same content
-but new author information
-```
-
